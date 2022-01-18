@@ -38,7 +38,7 @@ def show_centers(contours, image):
             cx = int(M["m10"]/M["m00"])
             cy = int(M["m01"]/M["m00"])
             cv.drawContours(image, [i], -1, (0, 255, 0), 2)
-            cv.circle(image, (cx, cy), 7, (0, 0, 255), -1)
+            cv.circle(image, (cx, cy), 3, (0, 0, 255), -1)
             cv.putText(image, "center", (cx - 20, cy - 20),
                     cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
             print(f"x: {cx} y: {cy}")
@@ -50,7 +50,7 @@ def get_main_contour(contours):
     return copy[0]
 
 if __name__ == "__main__":
-    image = read_image("example-in.png")
+    image = read_image("example-in-4.png")
     mask = find_mask(image)
 
     contours = find_contours(mask)
@@ -60,8 +60,8 @@ if __name__ == "__main__":
     # show_contours(contours, image)
     all = []
     for i in contours:
-        print(len(i))
-        if len(i) > 300 and len(i) < 1500:
+        # print(len(i))
+        if len(i) > 10 and len(i) < 1500:
             all.append(i)
     show_centers(all, image)
     cv.imshow("contours", image)
